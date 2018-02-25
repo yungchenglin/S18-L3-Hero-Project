@@ -3,12 +3,13 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <title>Hero Pjoject</title>
-    <link rel="stylesheet" href="css/indes.css">
+    <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Contrail One">
 </head>
 <body>
 
     <div id="screen">
+
       <div id="header">
 
         <div class="hp-block hero-hp-block">
@@ -18,7 +19,8 @@
 
           <div class="hp-text">
             <span id="hero-hp">130</span>
-            <div id="hero-max-hp"></div>
+            /
+            <span id="hero-max-hp">130</span>
           </div>
         </div>
 
@@ -31,19 +33,26 @@
 
           <div class="hp-text">
             <span id="monster-hp">130</span>
-            <div id="monster-max-hp"></div>
+            /
+            <span id="monster-max-hp">130</span>
           </div>
         </div>
 
+      </div>
+
       <div id="plane">
+
         <div id="hero-image-block">
-          <div class="skill-block"></div>
+          <div class="skill-block">
+            <img class="skill-image" id="skill" src="images/skill.png">
+          </div>
           <div id="character-block">
             <img class="character-image" src="images/hero.png">
             <img class="effect-image" style="display: none">
             <span class="hurt-text"></span> 
           </div>
         </div>
+
         <div id="monster-image-block">
           <div id="character-block">
             <img class="character-image" src="images/monster.png">
@@ -51,8 +60,21 @@
             <span clas="hurt-text"></span>
           </div>
         </div>
+          
+          <div id="dialog">
+            <div class="win-dialog">
+              <h2>Get win!!!</h2>
+              <button onclick="location.reload();">Replay again?</button>
+            </div>
+            <div class="lose-dialog">
+              <h2>Get lose!</h2>
+              <button onclick="location.reload();">Rechallenge again?</button>
+            </div>
+          </div>
       </div>
+
     </div>
+
 
    <script src="js/index.js"></script>
 
