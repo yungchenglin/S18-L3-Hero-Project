@@ -186,3 +186,8 @@
 #dialog.lose .lose-dialog {
   display: block;
 }
+
+#element {
+  -webkit-backface-visibility: hidden;
+  -webkit-transform: scale(1);
+}
