@@ -15,10 +15,33 @@ class BaseCharacter {
 
   getHurt(damage) {
     this.hp -= damage;
-    if (this.hp <=0){
+    if (this.hp <=0) {
       this.die();
     } 
+
+    var _this = this;
+    var i = 1;
+
+    _this.id = setInterval(function(){
+
+      if (i == 1){
+        _this.element.getElementsByClassName("effect-image")[0].style.display = "block";
+        _this.element.getElementsByClassName("hurt-text")[0].classList.add("attacked");
+        _this.element.getElementsByClassName("hurt-text")[0].textContent = damage;
+      }
+
+      _this.element.getElementsByClassName("effect-image")[0].src = "images/effect/blade/"+ i +".png"; i++;
+
+      if (i > 8){
+        _this.element.getElementsByClassName("effect-image")[0].style.display = "none";
+        _this.element.getElementsByClassName("hurt-text")[0].classList.remove("attacked");
+        _this.element.getElementsByClassName("hurt-text")[0].textContent = "";
+        clearInterval(_this.id);
+      }
+
+    }, 50);
   }
+
   die() {
     this.alive = false;
   }
@@ -82,12 +105,7 @@ var hero = new Hero("Bernard", 130, 30);
 var monster = new Monster("Skeleton", 130, 10);
 var rounds = 10;
 
-function addskillEvent() {
-  var skill = document.getElementById("skill");
-  skill.onclick = function(){
-    heroAttack();
-  }
-}addskillEvent();
+
 
 function endTurn() {
   rounds--;
@@ -127,3 +145,10 @@ function heroAttack() {
   }, 1100);
 
 }
+
+function addskillEvent() {
+  var skill = document.getElementById("skill");
+  skill.onclick = function(){
+    heroAttack();
+  }
+}addskillEvent();
