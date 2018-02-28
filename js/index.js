@@ -38,10 +38,9 @@ class BaseCharacter {
         _this.element.getElementsByClassName("hurt-text")[0].textContent = "";
         clearInterval(_this.id);
       }
-
-    }, 50);
+    }, 90);
   }
-
+  
   die() {
     this.alive = false;
   }
@@ -98,7 +97,6 @@ class Monster extends BaseCharacter {
     super.getHurt(damage);
     this.updateHtml(this.hpElement, this.hurtElement);
   }
-
 }
 
 var hero = new Hero("Bernard", 130, 30);
@@ -110,8 +108,8 @@ var rounds = 10;
 function endTurn() {
   rounds--;
   document.getElementById("round-num").textContent = rounds;
-  if (rounds < 1) {
-
+  if (rounds < 1) { 
+     
   }
 }
 
@@ -134,13 +132,13 @@ function heroAttack() {
         monster.element.classList.remove("attacking");
         endTurn();
         if (hero.alive == false) {
-
+          finish();
         } else {
           document.getElementsByClassName("skill-block")[0].style.display = "block";
         }
       }, 500);
   } else {
-
+    finish();
   }
   }, 1100);
 
@@ -152,3 +150,14 @@ function addskillEvent() {
     heroAttack();
   }
 }addskillEvent();
+
+function finish(){
+  var dialog = document.getElementById("dialog")
+  dialog.style.display = "block";
+  if (monster.alive == false){
+    dialog.classList.add("win");
+  } else {
+    dialog.classList.add("lose");
+  }
+}
+
