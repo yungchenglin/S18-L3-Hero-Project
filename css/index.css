@@ -135,10 +135,25 @@
   transition: bottom 500ms;
 }
 
+/* 給 .hurt-text.healed 使用*/
+#hero-image-block    .character-block .hurt-text.healed{
+  position: absolute;
+  font-size: 60px;
+  color: green;
+  width: 100%;
+  left: 0px;
+  bottom: 50px;
+  font-family: "Contrail One";
+  transition: bottom 500ms;
+}
+
 #hero-image-block    .character-block .hurt-text.attacked,
-#monster-image-block .character-block .hurt-text.attacked {
+#monster-image-block .character-block .hurt-text.attacked,
+#hero-image-block    .character-block .hurt-text.healed{
   bottom: 150px;
 }
+
+
 
 #hero-image-block .skill-block {
   position: relative;
