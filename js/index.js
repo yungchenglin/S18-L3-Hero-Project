@@ -40,16 +40,15 @@ class BaseCharacter {
       }
     }, 90);
   }
-  
+
   die() {
     this.alive = false;
   }
+
   updateHtml(hpElement, hurtElement) {
     hpElement.textContent = this.hp;
     hurtElement.style.width = (100 - this.hp / this.maxHp * 100) + "%";
   }
-
-
 }
 
 class Hero extends BaseCharacter {
@@ -60,20 +59,32 @@ class Hero extends BaseCharacter {
     this.hpElement = document.getElementById("hero-hp");
     this.maxHpElement = document.getElementById("hero-max-hp");
     this.hurtElement = document.getElementById("hero-hp-hurt");
+  
 
     this.hpElement.textContent = this.hp;
     this.maxHpElement.textContent = this.maxHp;
 
     console.log("Hero has be borned " + this.name + "!");
   }
+
   attack(character) {
     var damage = Math.random() * (this.ap / 2 ) +(this.ap / 2);
     super.attack(character,Math.floor(damage)); 
   }
+
   getHurt(damage) {
     super.getHurt(damage);
     this.updateHtml(this.hpElement, this.hurtElement);
   }
+
+  heal() {
+    this.hp += 30;
+    if  (this.hp > this.maxHp){
+      this.hp = this.maxHp;
+    }
+    this.updateHtml(this.hpElement, this.hurtElement);
+  }
+
 }
 
 class Monster extends BaseCharacter {
@@ -117,6 +128,7 @@ function endTurn() {
 function heroAttack() {
   document.getElementsByClassName("skill-block")[0].style.display = "none";
 
+
   setTimeout(function() {
     hero.element.classList.add("attacking");
       setTimeout(function() {
@@ -145,7 +157,31 @@ function heroAttack() {
 
 }
 
+function Heal() {
+  document.getElementsByClassName("skill-block")[0].style.display = "none";
 
+  setTimeout(function() {
+    hero.heal();
+  },100);
+
+  setTimeout(function() {
+    if (monster.alive) {
+    monster.element.classList.add("attacking");
+      setTimeout(function() {
+        monster.attack(hero);
+        monster.element.classList.remove("attacking");
+        endTurn();
+        if (hero.alive == false) {
+          finish();
+        } else {
+          document.getElementsByClassName("skill-block")[0].style.display = "block";
+        }
+      }, 500);
+  } else {
+    finish();
+  }
+  }, 1100);
+}
 
 
 function addskillEvent() {
@@ -153,14 +189,14 @@ function addskillEvent() {
   skill.onclick = function(){
     heroAttack();
   }
-}addskillEvent();
 
-function addhealEvent() {
   var heal = document.getElementById("heal");
   heal.onclick = function(){
-    heroRecover();
+    Heal();
   }
-}addhealEvent();
+
+}addskillEvent();
+
 
 function finish(){
   var dialog = document.getElementById("dialog")
