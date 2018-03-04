@@ -49,6 +49,7 @@ class BaseCharacter {
     hurtElement.style.width = (100 - this.hp / this.maxHp * 100) + "%";
   }
 
+
 }
 
 class Hero extends BaseCharacter {
@@ -109,7 +110,7 @@ function endTurn() {
   rounds--;
   document.getElementById("round-num").textContent = rounds;
   if (rounds < 1) { 
-     
+     finish();
   }
 }
 
@@ -144,12 +145,22 @@ function heroAttack() {
 
 }
 
+
+
+
 function addskillEvent() {
   var skill = document.getElementById("skill");
   skill.onclick = function(){
     heroAttack();
   }
 }addskillEvent();
+
+function addhealEvent() {
+  var heal = document.getElementById("heal");
+  heal.onclick = function(){
+    heroRecover();
+  }
+}addhealEvent();
 
 function finish(){
   var dialog = document.getElementById("dialog")
